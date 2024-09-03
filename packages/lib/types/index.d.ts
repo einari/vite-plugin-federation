@@ -18,6 +18,11 @@ declare interface VitePluginFederationOptions {
   filename?: string
 
   /**
+   * QueryString to be appended to all files in the container.
+   */
+  appendQueryString?: string
+
+  /**
    * transform hook need to handle file types
    * default ['.js','.ts','.jsx','.tsx','.mjs','.cjs','.vue','.svelte']
    */

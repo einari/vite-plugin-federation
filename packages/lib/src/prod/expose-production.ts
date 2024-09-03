@@ -84,7 +84,9 @@ export function prodExposePlugin(
         console.warn('The remote style takes effect only when the build.target option in the vite.config.ts file is higher than that of "es2020".')
         return
       }
-      const curUrl = metaUrl.substring(0, metaUrl.lastIndexOf('${options.filename}'))
+      const curUrl = metaUrl.substring(0, metaUrl.lastIndexOf('${
+        options.filename
+      }'))
 
       cssFilePaths.forEach(cssFilePath => {
         const href = curUrl + cssFilePath
@@ -96,13 +98,17 @@ export function prodExposePlugin(
           window[key].push(href);
         } else {
           const element = document.head.appendChild(document.createElement('link'))
-          element.href = href
+          element.href = href${
+            options.appendQueryString ? ` + '${options.appendQueryString}'` : ''
+          }
           element.rel = 'stylesheet'
         }
       })
     };
     async function __federation_import(name) {
-        return import(name);
+        return import(name${
+          options.appendQueryString ? ` + '${options.appendQueryString}'` : ''
+        });
     };
     export const get =(module) => {
       if(!moduleMap[module]) throw new Error('Can not find remote module ' + module)

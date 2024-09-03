@@ -62,7 +62,11 @@ export function prodRemotePlugin(
                     const script = document.createElement('script')
                     script.type = 'text/javascript';
                     script.onload = fn;
-                    script.src = resolvedUrl;
+                    script.src = resolvedUrl${
+                      options.appendQueryString
+                        ? ` + '${options.appendQueryString}'`
+                        : ''
+                    };
                     document.getElementsByTagName('head')[0].appendChild(script);
                 }
 
@@ -92,7 +96,11 @@ export function prodRemotePlugin(
                 }
 
                 async function __federation_import(name) {
-                    return import(name);
+                    return import(name${
+                      options.appendQueryString
+                        ? ` + '${options.appendQueryString}'`
+                        : ''
+                    });
                 }
 
                 const initMap = Object.create(null);
